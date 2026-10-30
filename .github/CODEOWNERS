@@ -1,0 +1,8 @@
+# Who gets asked for review automatically. Replace with GitHub usernames once areas are agreed
+# (see docs/team.md), then uncomment.
+#
+# /driver/   @username
+# /common/   @username @username
+# /lib/      @username
+# /gui/      @username
+# /tests/    @username

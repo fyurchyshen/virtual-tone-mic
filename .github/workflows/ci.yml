@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shared-header:
+    name: Shared header compiles (C and C++)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Compile as C
+        run: cl /nologo /W4 /WX /c /TC /Icommon tests\ci\header_check.c /Fo:header_check_c.obj
+      - name: Compile as C++
+        run: cl /nologo /W4 /WX /c /TP /Icommon tests\ci\header_check.c /Fo:header_check_cpp.obj
+
+  # TODO (M2/M3): build the communication library and run gtest tests.
+  # TODO (M3): build the driver. The WDK is available as NuGet packages
+  #            (Microsoft.Windows.WDK.x64), which avoids installing it on the runner.

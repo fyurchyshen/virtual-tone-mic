@@ -1,0 +1,31 @@
+title: "Meeting YYYY-MM-DD: "
+body:
+  - type: input
+    id: attendees
+    attributes:
+      label: Attendees
+    validations:
+      required: true
+  - type: textarea
+    id: agenda
+    attributes:
+      label: Agenda
+      value: |
+        1. 
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes and decisions
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: Action items
+      description: Each action has an owner. Create an issue for anything bigger than a few minutes.
+      value: |
+        - [ ] @name — action (#issue)
+    validations:
+      required: true

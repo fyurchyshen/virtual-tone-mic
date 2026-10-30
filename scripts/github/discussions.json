@@ -1,0 +1,42 @@
+[
+  {
+    "category": "announcements",
+    "title": "Welcome - how this repository is organised",
+    "body": "Hi! This is our space for the Virtual Tone Microphone project.\n\n**Quick tour**\n- **Issues + Project board**: all the work, split into milestones M0-M4. Each milestone has an epic that tracks its issues.\n- **Discussions**: Decisions (RFCs), Q&A, Meeting notes, Status updates.\n- **docs/**: setup guide, architecture, requirements traceability, testing, ADRs, glossary.\n- **CONTRIBUTING.md**: how we use branches, PRs, labels, and our Definition of Done.\n\n**First steps for everyone**\n1. Go through docs/setup.md and tick your name in the setup issue.\n2. Have a look at the Kickoff discussion and the open RFCs.\n\nNothing here is set in stone. If something about the structure doesn't work for you, say so and we'll change it."
+  },
+  {
+    "category": "general",
+    "title": "Kickoff: areas, availability and the first milestone",
+    "body": "To get started, it would help to agree on a few things together:\n\n1. **Areas**: the project splits fairly naturally into three parts. One possible split:\n   - Driver core (endpoint, stream, timer DPC, generator, synchronization)\n   - Interface & integration (control channel, IOCTL handlers, library, install/uninstall, Driver Verifier)\n   - GUI & tests (GUI, gtest, later presets and monitoring)\n\n   Which part would you prefer? Everyone can still work anywhere; this is mainly about who keeps an eye on what.\n2. **Availability**: when are you usually available, and are there any busy periods coming up?\n3. **First milestone**: M0 is about getting everyone's environment working and making the main decisions. Does that sound like the right first step?\n4. **Sync**: would a short weekly call work for everyone, and which day?\n\nPlease reply with your thoughts. I'll update docs/team.md once we agree."
+  },
+  {
+    "category": "decisions",
+    "title": "RFC: Driver model - PortCls vs ACX",
+    "body": "### Context\nSpec item 9 allows PortCls (WDM) or ACX (KMDF). Spec item 2 requires Windows 10 **and** 11.\n\n### Options\n**PortCls**: mature, both reference samples use it, lots of documentation. More boilerplate.\n\n**ACX**: newer and simpler on paper, built on KMDF. Fewer samples, and Windows 10 support needs to be confirmed.\n\n### Open question\nIs ACX available on Windows 10? If not, PortCls is the only option that meets the spec.\n\nThe result goes into docs/adr/0001-driver-model.md."
+  },
+  {
+    "category": "decisions",
+    "title": "RFC: Base sample - SimpleAudioSample vs SysVAD",
+    "body": "### Context\nStarting from a working Microsoft sample saves a lot of time.\n\n### Options\n**SimpleAudioSample**: small, easy to strip down to one capture endpoint.\n\n**SysVAD**: already has a virtual device with simulated capture from a generated tone, but it's very large.\n\n**Hybrid**: start from SimpleAudioSample and borrow tone generation / capture timing from SysVAD.\n\nWhat did you find when looking at them? The result goes into docs/adr/0002-base-sample.md."
+  },
+  {
+    "category": "decisions",
+    "title": "RFC: How the GUI reaches the driver",
+    "body": "### Context\nThe GUI talks to the driver through a library that wraps IOCTLs (spec item 6). In a PortCls driver, PortCls owns the dispatch routines, so our IOCTLs need a deliberate path.\n\n### Options\n- **A.** Device interface on the audio device + our own IRP_MJ_DEVICE_CONTROL handling, forwarding everything else to PortCls.\n- **B.** Separate control device object.\n- **C.** Custom KS property (more audio-native, but the spec asks for IOCTLs).\n\nDetails and pros/cons are in docs/adr/0003-control-channel.md. Depends on the driver model decision."
+  },
+  {
+    "category": "decisions",
+    "title": "RFC: Shared interface (VirtualToneIoctl.h)",
+    "body": "### Context\ncommon/VirtualToneIoctl.h is shared by the driver and the library. Agreeing on it early lets the driver, library and GUI be built in parallel.\n\n### Draft\n- 3 IOCTLs: get params, set params, get version\n- One struct: Version, Enabled, Waveform, FrequencyHz, AmplitudePercent\n- Limits and defaults from the spec, plus a shared validation macro\n\nSynchronization proposal (docs/adr/0004-parameter-synchronization.md): spin lock around the struct, the DPC copies it to a local snapshot.\n\nPlease review the header and comment on anything you'd change."
+  },
+  {
+    "category": "decisions",
+    "title": "RFC: GUI framework - Qt vs C#",
+    "body": "### Context\nThe spec allows any framework. The library is native code, so the choice affects how the GUI calls it.\n\n### Options\n**Qt (C++)**: calls the library directly; heavier toolchain.\n\n**C# (WPF/WinForms)**: fast UI development; needs P/Invoke to the library.\n\nMain factor: what the person mainly working on the GUI prefers. Result goes into docs/adr/0005-gui-framework.md."
+  },
+  {
+    "category": "q-a",
+    "title": "Environment setup problems - post them here",
+    "body": "Stuck on Visual Studio, the WDK, test signing, the VM or installing the sample? Post the symptom and what you tried.\n\nWhen it's solved, mark the answer and add a line to the Gotchas section of docs/setup.md."
+  }
+]

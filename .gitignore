@@ -1,0 +1,38 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+ipch/
+
+# Build output
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+*.obj
+*.pdb
+*.ilk
+*.tlog
+*.log
+*.lastbuildstate
+
+# Driver build artifacts
+*.sys
+*.cat
+*.cer
+*.pfx
+*.pvk
+
+# Qt / C#
+build*/
+*.pro.user*
+packages/
+
+# OS
+Thumbs.db
+.DS_Store

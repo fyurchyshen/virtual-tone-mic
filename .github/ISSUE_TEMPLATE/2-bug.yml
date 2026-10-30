@@ -1,0 +1,53 @@
+name: Bug
+description: Something doesn't work as expected
+labels: ["type: bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What was expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1. 
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [driver, lib, gui, install/uninstall, tests, other]
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows version and build
+      placeholder: Windows 11 23H2 (22631.xxxx)
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or branch
+  - type: dropdown
+    id: verifier
+    attributes:
+      label: Driver Verifier enabled?
+      options: ["Yes", "No", "Not relevant"]
+  - type: textarea
+    id: crash
+    attributes:
+      label: Bugcheck / crash details
+      description: Bugcheck code and WinDbg `!analyze -v` output, if it crashed.
+      render: text

@@ -1,0 +1,23 @@
+title: "Status update YYYY-MM-DD"
+body:
+  - type: textarea
+    id: done
+    attributes:
+      label: Done since last update
+    validations:
+      required: true
+  - type: textarea
+    id: next
+    attributes:
+      label: Next
+    validations:
+      required: true
+  - type: textarea
+    id: problems
+    attributes:
+      label: Problems and how they were solved / blockers
+  - type: input
+    id: milestone
+    attributes:
+      label: Current milestone
+      placeholder: e.g. M1 – Minimal microphone

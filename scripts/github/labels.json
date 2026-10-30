@@ -1,0 +1,87 @@
+[
+  {
+    "name": "type: task",
+    "color": "0e8a16",
+    "description": "A piece of work"
+  },
+  {
+    "name": "type: bug",
+    "color": "d73a4a",
+    "description": "Something doesn't work"
+  },
+  {
+    "name": "type: research",
+    "color": "d4c5f9",
+    "description": "Investigation needed before deciding or building"
+  },
+  {
+    "name": "type: decision",
+    "color": "5319e7",
+    "description": "Needs a team decision, recorded as an ADR"
+  },
+  {
+    "name": "type: epic",
+    "color": "3e4b9e",
+    "description": "Groups the issues of one milestone"
+  },
+  {
+    "name": "type: docs",
+    "color": "0075ca",
+    "description": "Documentation"
+  },
+  {
+    "name": "area: driver",
+    "color": "b60205",
+    "description": "Kernel-mode driver"
+  },
+  {
+    "name": "area: interface",
+    "color": "8a2be2",
+    "description": "Shared IOCTL interface in common/"
+  },
+  {
+    "name": "area: lib",
+    "color": "1d76db",
+    "description": "User-mode communication library"
+  },
+  {
+    "name": "area: gui",
+    "color": "2ea44f",
+    "description": "GUI application"
+  },
+  {
+    "name": "area: tests",
+    "color": "fbca04",
+    "description": "gtest, kmtest, stress and manual tests"
+  },
+  {
+    "name": "area: infra",
+    "color": "6e7781",
+    "description": "Environment, CI, scripts, repo setup"
+  },
+  {
+    "name": "priority: P0",
+    "color": "b60205",
+    "description": "Needed for the core specification"
+  },
+  {
+    "name": "priority: P1",
+    "color": "d93f0b",
+    "description": "Important"
+  },
+  {
+    "name": "priority: P2",
+    "color": "fef2c0",
+    "description": "Nice to have"
+  },
+  {
+    "name": "status: blocked",
+    "color": "000000",
+    "description": "Waiting on something; say what in a comment"
+  },
+  {
+    "name": "status: needs discussion",
+    "color": "c2e0c6",
+    "description": "Needs input from the team before continuing"
+  }
+]

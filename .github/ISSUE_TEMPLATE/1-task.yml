@@ -1,0 +1,37 @@
+name: Task
+description: A piece of work to do
+labels: ["type: task"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should be achieved, in one or two sentences?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: How do we know it's done? Use a checklist.
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [driver, interface, lib, gui, tests, infra, docs]
+    validations:
+      required: true
+  - type: input
+    id: spec
+    attributes:
+      label: Spec reference
+      description: Which requirement this covers (see docs/requirements.md), e.g. R7
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Links, hints, related issues.

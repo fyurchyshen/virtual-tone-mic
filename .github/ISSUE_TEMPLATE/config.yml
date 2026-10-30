@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question
+    url: https://github.com/robert-md-or/virtual-tone-mic/discussions/categories/q-a
+    about: Not sure how something works? Ask in Discussions Q&A.
+  - name: Design decision
+    url: https://github.com/robert-md-or/virtual-tone-mic/discussions/categories/decisions
+    about: Something the team needs to agree on? Start a Decisions discussion.

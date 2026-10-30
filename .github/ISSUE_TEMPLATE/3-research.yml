@@ -1,0 +1,28 @@
+name: Research / investigation
+description: Something to find out before we can decide or build
+labels: ["type: research"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question to answer
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: What does this block or influence?
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output
+      description: e.g. a short comparison in the linked Decisions discussion, a prototype, an ADR draft.
+      value: |
+        - [ ] Findings posted in a comment or discussion
+        - [ ] ADR updated (if it leads to a decision)
+  - type: input
+    id: timebox
+    attributes:
+      label: Time box
+      placeholder: e.g. 1 day

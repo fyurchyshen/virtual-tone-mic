@@ -1,0 +1,22 @@
+[
+  {
+    "title": "M0 - Environment & decisions",
+    "description": "Everyone can build and install a sample in a test VM; core design decisions made."
+  },
+  {
+    "title": "M1 - Minimal microphone",
+    "description": "Capture-only device, 48 kHz / 16-bit / stereo, default 440 Hz sine at 50%, verified by recording."
+  },
+  {
+    "title": "M2 - Control path",
+    "description": "Shared interface, communication library, GUI, live parameter changes."
+  },
+  {
+    "title": "M3 - Hardening",
+    "description": "Install/uninstall without reboot, Driver Verifier clean, Windows 10 and 11 tested."
+  },
+  {
+    "title": "M4 - Additional features",
+    "description": "Tests, extra options, presets, monitoring, real-mic mixing (in the spec's order)."
+  }
+]

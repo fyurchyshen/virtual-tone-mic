@@ -1,0 +1,540 @@
+{
+  "epics": [
+    {
+      "key": "M0",
+      "title": "Epic: M0 - Environment & decisions",
+      "body": "Everyone can build and install a sample in a test VM, and the core design decisions are made.\n\nExit criteria: every member has completed docs/setup.md sections 1-5, and ADR-0001, 0002 and 0005 are Accepted.",
+      "milestone": "M0 - Environment & decisions",
+      "labels": [
+        "type: epic"
+      ]
+    },
+    {
+      "key": "M1",
+      "title": "Epic: M1 - Minimal microphone",
+      "body": "A capture-only Virtual Tone Microphone that produces a 440 Hz sine at 50% in PCM 16-bit stereo 48 kHz, right after boot, verified by recording.\n\nExit criteria: M1 section of docs/testing.md passes on Windows 11.",
+      "milestone": "M1 - Minimal microphone",
+      "labels": [
+        "type: epic"
+      ]
+    },
+    {
+      "key": "M2",
+      "title": "Epic: M2 - Control path",
+      "body": "Shared interface agreed, communication library and GUI working, parameters changed live without restarting the stream.\n\nExit criteria: M2 section of docs/testing.md passes.",
+      "milestone": "M2 - Control path",
+      "labels": [
+        "type: epic"
+      ]
+    },
+    {
+      "key": "M3",
+      "title": "Epic: M3 - Hardening",
+      "body": "Install/uninstall without reboot, Driver Verifier clean, tested on Windows 10 and 11.\n\nExit criteria: all R requirements in docs/requirements.md marked Verified.",
+      "milestone": "M3 - Hardening",
+      "labels": [
+        "type: epic"
+      ]
+    },
+    {
+      "key": "M4",
+      "title": "Epic: M4 - Additional features",
+      "body": "Additional features from the spec, in its order: tests, extra options, presets, monitoring, real-mic mixing.",
+      "milestone": "M4 - Additional features",
+      "labels": [
+        "type: epic"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "epic": "M0",
+      "title": "Set up development machine (each member)",
+      "labels": [
+        "type: task",
+        "area: infra",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nEvery team member has Visual Studio, the matching SDK/WDK and the samples ready.\n\n## Acceptance criteria\n- [ ] Member 1 done\n- [ ] Member 2 done\n- [ ] Member 3 done\n- [ ] Problems and fixes added to docs/setup.md Gotchas\n\n## Spec reference\nT1\n\n## Notes\nFollow docs/setup.md section 1."
+    },
+    {
+      "epic": "M0",
+      "title": "Set up test VMs: Windows 11 and Windows 10 x64",
+      "labels": [
+        "type: task",
+        "area: infra",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nEach member has a Windows 11 x64 test VM with test signing; at least one Windows 10 x64 VM exists in the team.\n\n## Acceptance criteria\n- [ ] Secure Boot off, test signing on, Test Mode visible\n- [ ] Audacity installed\n- [ ] Clean snapshot taken\n- [ ] KDNET + WinDbg working (recommended)\n\n## Spec reference\nR2\n\n## Notes\nFollow docs/setup.md section 2."
+    },
+    {
+      "epic": "M0",
+      "title": "Build, install and uninstall SimpleAudioSample in the VM",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nGet a working reference: the sample builds, installs, shows up in Sound settings, records, and uninstalls without reboot.\n\n## Acceptance criteria\n- [ ] Builds Debug x64 without errors\n- [ ] Device visible in Sound settings\n- [ ] Audio recorded in Audacity\n- [ ] Uninstalled without reboot\n- [ ] Steps or gotchas added to docs/setup.md\n\n## Spec reference\nR1, R3\n\n## Notes\ndocs/setup.md sections 3-5."
+    },
+    {
+      "epic": "M0",
+      "title": "Explore SysVAD: capture path and tone generation",
+      "labels": [
+        "type: research",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nFind the parts of SysVAD that are relevant to us (simulated capture, tone generator, timer/DPC handling) and note where they live.\n\n## Acceptance criteria\n- [ ] Short summary posted in the Base sample RFC discussion\n- [ ] List of files/classes worth reusing\n\n## Notes\nTime box: 1-2 days. Feeds ADR-0002."
+    },
+    {
+      "epic": "M0",
+      "title": "Decide driver model: PortCls vs ACX (ADR-0001)",
+      "labels": [
+        "type: decision",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nAgree on the driver model and record it in docs/adr/0001-driver-model.md.\n\n## Acceptance criteria\n- [ ] Windows 10 support of ACX confirmed or ruled out\n- [ ] Discussion concluded\n- [ ] ADR-0001 status set to Accepted\n\n## Spec reference\nR2, R9\n\n## Notes\nDiscuss in: RFC: Driver model - PortCls vs ACX"
+    },
+    {
+      "epic": "M0",
+      "title": "Decide base sample (ADR-0002)",
+      "labels": [
+        "type: decision",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nAgree whether to start from SimpleAudioSample, SysVAD, or a hybrid.\n\n## Acceptance criteria\n- [ ] Discussion concluded\n- [ ] ADR-0002 status set to Accepted\n\n## Notes\nDiscuss in: RFC: Base sample. Depends on the SysVAD exploration."
+    },
+    {
+      "epic": "M0",
+      "title": "Decide GUI framework (ADR-0005)",
+      "labels": [
+        "type: decision",
+        "area: gui",
+        "priority: P1"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nAgree on Qt or C# for the GUI.\n\n## Acceptance criteria\n- [ ] Discussion concluded\n- [ ] ADR-0005 status set to Accepted\n\n## Spec reference\nR5\n\n## Notes\nDiscuss in: RFC: GUI framework"
+    },
+    {
+      "epic": "M0",
+      "title": "Agree on areas and fill in docs/team.md",
+      "labels": [
+        "type: task",
+        "area: infra",
+        "priority: P0"
+      ],
+      "milestone": "M0 - Environment & decisions",
+      "body": "## Goal\nEveryone knows which area they mainly look after; GitHub usernames and availability are recorded.\n\n## Acceptance criteria\n- [ ] docs/team.md filled in\n- [ ] CODEOWNERS updated\n- [ ] Issues of M1 assigned\n\n## Notes\nDiscuss in: Kickoff discussion"
+    },
+    {
+      "epic": "M1",
+      "title": "Create driver project from the base sample and rename it",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nOur own driver project in driver/, renamed everywhere (binary, INF, hardware ID, pool tags, friendly name).\n\n## Acceptance criteria\n- [ ] Builds Debug and Release x64\n- [ ] No leftover sample names in INF or code\n- [ ] Friendly name is Virtual Tone Microphone\n\n## Spec reference\nR3, R9"
+    },
+    {
+      "epic": "M1",
+      "title": "Capture-only endpoint: remove render and unused paths",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nThe driver exposes exactly one capture endpoint and nothing else.\n\n## Acceptance criteria\n- [ ] Only one input device appears in Sound settings\n- [ ] No output device appears\n- [ ] Unused code removed\n\n## Spec reference\nR3"
+    },
+    {
+      "epic": "M1",
+      "title": "Fix the format to PCM 16-bit stereo 48 kHz",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nData ranges allow only PCM, 16-bit, 2 channels, 48000 Hz.\n\n## Acceptance criteria\n- [ ] Device properties show only this format\n- [ ] Audacity records at 48 kHz stereo\n\n## Spec reference\nR4"
+    },
+    {
+      "epic": "M1",
+      "title": "Timer DPC and capture buffer pipeline (nonpaged)",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nAudio frames are produced on a timer DPC into the capture buffer, using only nonpaged memory.\n\n## Acceptance criteria\n- [ ] Correct number of frames per period, no drift over 10 minutes\n- [ ] No glitches or dropouts in a long recording\n- [ ] All DPC data in nonpaged memory\n\n## Spec reference\nR4, R9\n\n## Notes\nSee docs/architecture.md, IRQL and memory rules."
+    },
+    {
+      "epic": "M1",
+      "title": "Sine generator with defaults (440 Hz, 50%)",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nGenerate a sine wave in the driver using the defaults from common/VirtualToneIoctl.h.\n\n## Acceptance criteria\n- [ ] Plot Spectrum peak at 440 Hz\n- [ ] Amplitude about 50% of full scale\n- [ ] Phase accumulator keeps the wave continuous between DPC runs\n- [ ] No floating point at DISPATCH_LEVEL without saving the FP state\n\n## Spec reference\nR4, R8"
+    },
+    {
+      "epic": "M1",
+      "title": "Verify the signal starts at boot without the GUI",
+      "labels": [
+        "type: task",
+        "area: tests",
+        "priority: P0"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nAfter a reboot, recording from the device gives the default signal without starting anything else.\n\n## Acceptance criteria\n- [ ] Verified on Windows 11\n- [ ] Verified on Windows 10\n\n## Spec reference\nR8"
+    },
+    {
+      "epic": "M1",
+      "title": "Write the M1 test notes in docs/testing.md",
+      "labels": [
+        "type: docs",
+        "area: tests",
+        "priority: P1"
+      ],
+      "milestone": "M1 - Minimal microphone",
+      "body": "## Goal\nDocument how M1 was tested so it can be repeated.\n\n## Acceptance criteria\n- [ ] Checklist items for M1 confirmed or updated"
+    },
+    {
+      "epic": "M2",
+      "title": "Review and agree on the shared header (common/VirtualToneIoctl.h)",
+      "labels": [
+        "type: decision",
+        "area: interface",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nAgree on IOCTL codes, the parameter struct, limits and defaults before driver and library work in parallel.\n\n## Acceptance criteria\n- [ ] Discussion concluded\n- [ ] Header marked as agreed in common/README.md\n- [ ] ADR-0004 accepted\n\n## Spec reference\nR6, R7, R9\n\n## Notes\nDiscuss in: RFC: Shared interface"
+    },
+    {
+      "epic": "M2",
+      "title": "Decide how the library reaches the driver (ADR-0003)",
+      "labels": [
+        "type: decision",
+        "area: driver",
+        "area: interface",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nChoose the control channel: device interface + own dispatch, separate control device, or KS property.\n\n## Acceptance criteria\n- [ ] Small prototype proves IOCTLs reach our code\n- [ ] ADR-0003 accepted\n\n## Spec reference\nR6\n\n## Notes\nDiscuss in: RFC: How the GUI reaches the driver"
+    },
+    {
+      "epic": "M2",
+      "title": "Implement the control channel in the driver",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: interface",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nThe library can open the driver and send IOCTLs according to ADR-0003.\n\n## Acceptance criteria\n- [ ] Device found via the interface GUID\n- [ ] Unknown IOCTLs rejected with STATUS_INVALID_DEVICE_REQUEST\n- [ ] Install/uninstall still works without reboot\n\n## Spec reference\nR6, R1"
+    },
+    {
+      "epic": "M2",
+      "title": "IOCTL handlers: get/set params and version",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: interface",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nHandle IOCTL_VTM_GET_PARAMS, IOCTL_VTM_SET_PARAMS and IOCTL_VTM_GET_VERSION.\n\n## Acceptance criteria\n- [ ] Buffer sizes checked\n- [ ] Invalid values rejected with VTM_PARAMS_VALID\n- [ ] Correct NTSTATUS and Information returned\n\n## Spec reference\nR6, R7"
+    },
+    {
+      "epic": "M2",
+      "title": "Synchronize parameters between IOCTL handlers and DPC (ADR-0004)",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nParameters are shared safely between PASSIVE_LEVEL and DISPATCH_LEVEL.\n\n## Acceptance criteria\n- [ ] Spin lock (or the agreed method) around the shared struct\n- [ ] DPC works on a local snapshot\n- [ ] Lock held only for the copy\n- [ ] Verified with Driver Verifier\n\n## Spec reference\nR7, R9"
+    },
+    {
+      "epic": "M2",
+      "title": "Square and noise waveforms",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nAdd the remaining waveforms from the spec.\n\n## Acceptance criteria\n- [ ] Square wave correct at 20 Hz and 20 kHz\n- [ ] Noise uses an integer PRNG with nonpaged state\n- [ ] Switching waveform while recording causes no crash or stop\n\n## Spec reference\nR5"
+    },
+    {
+      "epic": "M2",
+      "title": "Apply frequency and amplitude changes live without clicks",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P1"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nChanges take effect on the next DPC run and sound smooth.\n\n## Acceptance criteria\n- [ ] Phase continuity on frequency change\n- [ ] Amplitude 0% gives silence, 100% full scale without overflow\n- [ ] Enable/disable switches instantly\n\n## Spec reference\nR7"
+    },
+    {
+      "epic": "M2",
+      "title": "Communication library: API design",
+      "labels": [
+        "type: task",
+        "area: lib",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nDefine the library's public API (header) so the GUI can be built against it.\n\n## Acceptance criteria\n- [ ] API header in lib/ reviewed by the team\n- [ ] Error handling approach agreed\n- [ ] Thread-safety documented\n\n## Spec reference\nR6"
+    },
+    {
+      "epic": "M2",
+      "title": "Communication library: implementation",
+      "labels": [
+        "type: task",
+        "area: lib",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nImplement the API on top of the IOCTLs.\n\n## Acceptance criteria\n- [ ] Finds and opens the device by interface GUID\n- [ ] Get/set params work\n- [ ] Version mismatch detected\n- [ ] Clear error when the driver is missing\n\n## Spec reference\nR6"
+    },
+    {
+      "epic": "M2",
+      "title": "Mock library for GUI development",
+      "labels": [
+        "type: task",
+        "area: lib",
+        "area: gui",
+        "priority: P1"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nA fake implementation of the library API so the GUI can be developed before the driver is ready.\n\n## Acceptance criteria\n- [ ] Same API as the real library\n- [ ] Selectable at build time or run time"
+    },
+    {
+      "epic": "M2",
+      "title": "GUI: layout and controls",
+      "labels": [
+        "type: task",
+        "area: gui",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nAn intuitive window with all the controls from the spec.\n\n## Acceptance criteria\n- [ ] Enable/disable toggle\n- [ ] Waveform selector\n- [ ] Frequency control 20 Hz - 20 kHz (slider + number input)\n- [ ] Amplitude 0-100%\n- [ ] Current values shown when the GUI starts\n\n## Spec reference\nR5"
+    },
+    {
+      "epic": "M2",
+      "title": "GUI: connect to the library with live updates",
+      "labels": [
+        "type: task",
+        "area: gui",
+        "area: lib",
+        "priority: P0"
+      ],
+      "milestone": "M2 - Control path",
+      "body": "## Goal\nChanges in the GUI are sent to the driver immediately through the library.\n\n## Acceptance criteria\n- [ ] Slider changes applied while dragging without flooding the driver\n- [ ] Errors shown to the user\n- [ ] No DeviceIoControl calls in gui/\n\n## Spec reference\nR6, R7"
+    },
+    {
+      "epic": "M3",
+      "title": "Install/uninstall without reboot and helper scripts",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: infra",
+        "priority: P0"
+      ],
+      "milestone": "M3 - Hardening",
+      "body": "## Goal\nInstalling and uninstalling never asks for a reboot when no app uses the device.\n\n## Acceptance criteria\n- [ ] scripts/driver install and uninstall scripts work\n- [ ] Verified on Windows 10 and 11\n- [ ] Behaviour while a recording is running documented\n\n## Spec reference\nR1"
+    },
+    {
+      "epic": "M3",
+      "title": "Driver Verifier pass",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: tests",
+        "priority: P0"
+      ],
+      "milestone": "M3 - Hardening",
+      "body": "## Goal\nThe driver runs the full manual checklist with Driver Verifier enabled without violations.\n\n## Acceptance criteria\n- [ ] /standard pass\n- [ ] Additional checks tried and recorded\n- [ ] All findings fixed\n\n## Spec reference\nR10"
+    },
+    {
+      "epic": "M3",
+      "title": "Full manual test on Windows 10 and Windows 11",
+      "labels": [
+        "type: task",
+        "area: tests",
+        "priority: P0"
+      ],
+      "milestone": "M3 - Hardening",
+      "body": "## Goal\nRun the whole checklist in docs/testing.md on both OS versions.\n\n## Acceptance criteria\n- [ ] Windows 10 x64 pass\n- [ ] Windows 11 x64 pass\n- [ ] docs/requirements.md Verified column updated\n\n## Spec reference\nR2"
+    },
+    {
+      "epic": "M3",
+      "title": "Code review: IRQL, memory and static analysis",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "priority: P0"
+      ],
+      "milestone": "M3 - Hardening",
+      "body": "## Goal\nA dedicated review of the driver against the conventions in CONTRIBUTING.md.\n\n## Acceptance criteria\n- [ ] IRQL annotations on all functions\n- [ ] No pageable code reachable from the DPC\n- [ ] Code Analysis runs without warnings\n- [ ] Every allocation freed on unload\n\n## Spec reference\nR9, R10"
+    },
+    {
+      "epic": "M3",
+      "title": "User guide: install, use, uninstall",
+      "labels": [
+        "type: docs",
+        "priority: P1"
+      ],
+      "milestone": "M3 - Hardening",
+      "body": "## Goal\nA short guide in docs/ for someone who has never seen the project.\n\n## Acceptance criteria\n- [ ] Install steps\n- [ ] Using the GUI\n- [ ] Uninstall steps\n- [ ] Troubleshooting"
+    },
+    {
+      "epic": "M4",
+      "title": "gtest tests for the communication library",
+      "labels": [
+        "type: task",
+        "area: tests",
+        "area: lib",
+        "priority: P1"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nUser-mode tests for the protocol logic between the GUI and the driver.\n\n## Acceptance criteria\n- [ ] googletest added to the build\n- [ ] Validation, packing and error paths covered\n- [ ] Runs in CI\n\n## Spec reference\nA1"
+    },
+    {
+      "epic": "M4",
+      "title": "kmtest tests for the driver side",
+      "labels": [
+        "type: task",
+        "area: tests",
+        "area: driver",
+        "priority: P1"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nKernel-mode tests for the IOCTL handling.\n\n## Acceptance criteria\n- [ ] kmtest set up\n- [ ] Invalid sizes and values rejected\n- [ ] Params stored correctly\n\n## Spec reference\nA1"
+    },
+    {
+      "epic": "M4",
+      "title": "Stress test: change parameters while recording",
+      "labels": [
+        "type: task",
+        "area: tests",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nContinuously change parameters during a long recording.\n\n## Acceptance criteria\n- [ ] 10+ minute run without crash or Verifier violation\n- [ ] Stream never interrupted\n\n## Spec reference\nA1"
+    },
+    {
+      "epic": "M4",
+      "title": "Extra formats: 44.1 kHz and 24-bit",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nSupport 44.1 kHz and 24-bit in addition to the base format.\n\n## Acceptance criteria\n- [ ] Formats selectable\n- [ ] Generator correct for each format\n\n## Spec reference\nA2"
+    },
+    {
+      "epic": "M4",
+      "title": "Extra waveforms: triangle, sawtooth, mixing",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nAdd triangle and sawtooth, optionally several waveforms mixed.\n\n## Acceptance criteria\n- [ ] New waveforms in driver and GUI\n- [ ] Interface version bumped if needed\n\n## Spec reference\nA2"
+    },
+    {
+      "epic": "M4",
+      "title": "Channel selection or per-channel amplitude",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nLeft/right channel selection or a separate amplitude per channel.\n\n## Acceptance criteria\n- [ ] Works while recording\n- [ ] GUI controls added\n\n## Spec reference\nA2"
+    },
+    {
+      "epic": "M4",
+      "title": "Presets: save and load parameters",
+      "labels": [
+        "type: task",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nSave and load signal parameters from the GUI.\n\n## Acceptance criteria\n- [ ] Save to file\n- [ ] Load from file\n- [ ] Invalid preset files handled\n\n## Spec reference\nA3"
+    },
+    {
+      "epic": "M4",
+      "title": "Driver statistics with user-set refresh interval",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: interface",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nFrames generated, DPC count, max DPC execution time, shown in the GUI.\n\n## Acceptance criteria\n- [ ] New IOCTL in common/\n- [ ] Refresh interval configurable\n- [ ] Statistics collection safe at DISPATCH_LEVEL\n\n## Spec reference\nA4"
+    },
+    {
+      "epic": "M4",
+      "title": "Level meter in the GUI",
+      "labels": [
+        "type: task",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nShow the current signal level.\n\n## Acceptance criteria\n- [ ] Updates smoothly\n- [ ] Low CPU usage\n\n## Spec reference\nA4"
+    },
+    {
+      "epic": "M4",
+      "title": "Handle driver absent or removed while the GUI runs",
+      "labels": [
+        "type: task",
+        "area: gui",
+        "area: lib",
+        "priority: P1"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nThe GUI shows whether the driver is present and survives it disappearing.\n\n## Acceptance criteria\n- [ ] Status indicator\n- [ ] No crash when the driver is uninstalled while the GUI runs\n- [ ] Reconnects when it comes back\n\n## Spec reference\nA4"
+    },
+    {
+      "epic": "M4",
+      "title": "Mix the real microphone into the virtual one",
+      "labels": [
+        "type: task",
+        "area: driver",
+        "area: lib",
+        "area: gui",
+        "priority: P2"
+      ],
+      "milestone": "M4 - Additional features",
+      "body": "## Goal\nGUI captures the real mic with WASAPI and passes it to the driver via a ring buffer; the driver mixes it with the generated signal.\n\n## Acceptance criteria\n- [ ] Ring buffer design agreed (ADR)\n- [ ] Underruns and overruns handled without crashing\n- [ ] Driver Verifier clean\n\n## Spec reference\nA5\n\n## Notes\nHardest feature: start only after everything else is done."
+    }
+  ]
+}

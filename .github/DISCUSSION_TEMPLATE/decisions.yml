@@ -1,0 +1,38 @@
+title: "RFC: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for choices the team needs to agree on. When agreed, record the result as an ADR in `docs/adr/`.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What problem are we solving? Which requirement is involved?
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      description: List the options with pros and cons.
+      value: |
+        **Option A:**
+        - Pros:
+        - Cons:
+
+        **Option B:**
+        - Pros:
+        - Cons:
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal (optional)
+      description: Which option you lean towards and why. Others may disagree, that's the point.
+  - type: input
+    id: deadline
+    attributes:
+      label: Decide by
+      placeholder: e.g. Friday
